@@ -26,11 +26,24 @@ public class GasCar extends Car {
         this.engineType = engineType;
     }
 
+    /**
+     * Compares car o to this car based off fuel tank capacity
+     * @param o the object to be compared.
+     * @return 0 if the fuel tank capacity is the same
+     *         -1 if this car has a smaller fuel tank capacity than car o
+     *         1 if this car has a higher fuel tank capacity than car o
+     */
     @Override
     public int compareTo(Car o) {
     }
 
-    public static boolean isRightFuel() {}
+    /**
+     * Compares input fuel vs fuel type to see if they're the same
+     * @param inputFuelType the input fuelType to be compared
+     * @return true if the input fuel is the right fuel
+     *         false if the input fuel is the wrong fuel
+     */
+    public boolean isRightFuel(String inputFuelType) {}
 
     @Override
     public String toString() {

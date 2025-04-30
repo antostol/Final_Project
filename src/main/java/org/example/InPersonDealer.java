@@ -1,5 +1,7 @@
 package org.example;
 
+import java.time.Clock;
+import java.util.List;
 import java.util.Objects;
 
 public class InPersonDealer extends Dealership {
@@ -19,19 +21,38 @@ public class InPersonDealer extends Dealership {
         this.numberOfEmployees = numberOfEmployees;
     }
 
-    public InPersonDealer(String name, int phoneNumber, int inventory, String storeHours, String location, int numberOfEmployees) {
+    public InPersonDealer(String name, int phoneNumber, List<Car> inventory, String storeHours, String location, int numberOfEmployees) {
         super(name, phoneNumber, inventory);
         this.storeHours = storeHours;
         this.location = location;
         this.numberOfEmployees = numberOfEmployees;
     }
 
+    /**
+     * Compares dealership o1 to dealership o2 based off number of employees
+     * @param o1 the first object to be compared.
+     * @param o2 the second object to be compared.
+     * @return 0 if the number of employees is the same
+     *         -1 if the first dealership has fewer employees than the second
+     *         1 if the first dealership has more employees than the second
+     */
     @Override
     public int compare(Dealership o1, Dealership o2) {}
 
-    public static boolean isOpen() {}
+    /**
+     * Checks if dealership is opened based off the store hours and the given system clock
+     * @return true if the store is opened
+     *         false if the store isn't opened
+     */
+    public static boolean isOpen(Clock clock) {}
 
-    public static boolean isLocated() {}
+    /**
+     * Verifies if input location matches with the store location
+     * @param location the input location
+     * @return true if the input location matches with the store location
+     *         false if the input location doesn't match with the store location
+     */
+    public static boolean isLocated(String location) {}
 
     @Override
     public String toString() {

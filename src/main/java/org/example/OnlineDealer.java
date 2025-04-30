@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.List;
 import java.util.Objects;
 
 public class OnlineDealer extends Dealership {
@@ -19,17 +20,31 @@ public class OnlineDealer extends Dealership {
         this.rating = rating;
     }
 
-    public OnlineDealer(String name, int phoneNumber, int inventory, String website, String returnPolicy, double rating) {
+    public OnlineDealer(String name, int phoneNumber, List<Car> inventory, String website, String returnPolicy, double rating) {
         super(name, phoneNumber, inventory);
         this.website = website;
         this.returnPolicy = returnPolicy;
         this.rating = rating;
     }
 
+    /**
+     * Compares dealership o1 to dealership o2 based off their rating
+     * @param o1 the first object to be compared.
+     * @param o2 the second object to be compared.
+     * @return 0 if their rating is equal
+     *         -1 if the rating of the first dealership is lower than the second
+     *         1 if the rating of the first dealership is high than the second
+     */
     @Override
     public int compare(Dealership o1, Dealership o2) {}
 
-    public static String getRatingCategory() {}
+    /**
+     * Rates online dealerships based off their rating
+     * @return Great if dealership rating is higher than 4
+     *         Average if dealership rating is between 3 and 4
+     *         Terrible if dealership rating is lower than 3
+     */
+    public String getRatingCategory() {}
 
     @Override
     public String toString() {

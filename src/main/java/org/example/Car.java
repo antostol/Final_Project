@@ -20,12 +20,23 @@ public abstract class Car implements Comparable<Car> {
         this.horsePower = horsePower;
     }
 
+    /**
+     * Compares car o to this car based on first horsepower, then brand, then model
+     * @param o the object to be compared.
+     * @return 0 if horsepower, brand and model are the same for this car and car o
+     *         -1 if car o has lower horsepower/lower horsepower + brand/model that come alphabetically before/afterward car o's
+     *         1 if car o has higher horsepower/higher horsepower + brand/model that come alphabetically before/afterward car o's
+     */
     @Override
-    public int compareTo(Car o) {};
+    public int compareTo(Car o) {}
 
-    public static boolean matches(String brand, String model) {}
-
-    public static boolean isHighPerformance() {}
+    /**
+     * Verifies the performance of a car based off of its horsepower
+     * 400 hp and less = isn't high performance; 400+ hp = is high performance
+     * @return true if the car is high perfomance
+     *         returns false if car isn't high perfomance
+     */
+    public boolean isHighPerformance() {}
 
     @Override
     public String toString() {
