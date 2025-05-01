@@ -44,7 +44,7 @@ public class InPersonDealer extends Dealership {
      * @return true if the store is opened
      *         false if the store isn't opened
      */
-    public static boolean isOpen(Clock clock) {}
+    public boolean isOpen(Clock clock) {}
 
     /**
      * Verifies if input location matches with the store location
@@ -52,7 +52,7 @@ public class InPersonDealer extends Dealership {
      * @return true if the input location matches with the store location
      *         false if the input location doesn't match with the store location
      */
-    public static boolean isLocated(String location) {}
+    public boolean isLocated(String location) {}
 
     @Override
     public String toString() {
@@ -76,9 +76,7 @@ public class InPersonDealer extends Dealership {
         return Objects.hash(super.hashCode(), storeHours, location, numberOfEmployees);
     }
 
-    public String getStoreHours() {
-        return storeHours;
-    }
+    public String getStoreHours() { return storeHours; }
 
     public void setStoreHours(String storeHours) {
         this.storeHours = storeHours;
