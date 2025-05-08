@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DealershipTest {
     @Test
     public void testAddCar_NewCar() {
-        Dealership dealership = new InPersonDealer(); // using concrete subclass
+        Dealership dealership = new InPersonDealer();
         Car car = new GasCar("Toyota", "Camry", 200, 50.0, "Gasoline", "V6");
         dealership.addCar(car);
         int expected = 1;

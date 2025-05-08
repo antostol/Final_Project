@@ -34,7 +34,8 @@ public class ElectricCar extends Car {
      *         1 if this car has lower charging time/lower charging time + lower batter capacity/higher batter capacity than car o
      */
     @Override
-    public int compareTo(Car o) {}
+    public int compareTo(Car o) {
+    }
 
     /**
      * Verifies the charging speed of an electric car based on its charging time

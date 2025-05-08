@@ -28,15 +28,30 @@ public abstract class Car implements Comparable<Car> {
      *         1 if car o has higher horsepower/higher horsepower + brand/model that come alphabetically before/afterward car o's
      */
     @Override
-    public int compareTo(Car o) {}
+    public int compareTo(Car o) {
+        return this.horsePower - o.horsePower * 1000
+                + this.brand.compareTo(o.brand) * 100
+                + this.model.compareTo(o.model);
+    }
 
     /**
      * Verifies the performance of a car based off of its horsepower
      * 400 hp and less = isn't high performance; 400+ hp = is high performance
-     * @return true if the car is high perfomance
-     *         returns false if car isn't high perfomance
+     * @return true if the car is high performance
+     *         returns false if car isn't high performance
      */
-    public boolean isHighPerformance() {}
+    public boolean isHighPerformance() {
+        try {
+            if (this.horsePower < 0) {
+                throw new IllegalArgumentException("Horse power cannot be less than zero");
+            }
+
+            return this.horsePower > 400;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+    }
 
     @Override
     public String toString() {
