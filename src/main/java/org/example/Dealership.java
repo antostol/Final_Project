@@ -26,19 +26,54 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
      * Displays the dealership's name, phone number, and full list of cars from inventory
      * Formats the output in a user-friendly way
      */
-    public void displayInfo() {}
+    public void displayInfo() {
+        System.out.println("==== DEALERSHIP INFO =====");
+        System.out.println("Name          : " + this.name);
+        System.out.println("Phone number  : " + this.phoneNumber);
+        System.out.println("Inventory     : " + this.inventory.size() + " cars in stock");
+
+        int count = 1;
+
+        System.out.println("-- Electric cars--");
+        for (Car car : this.inventory) {
+            if (car instanceof ElectricCar electricCar) {
+                System.out.println(count + ". " +  electricCar.getBrand() + " " + electricCar.getModel() +  " | " +
+                        electricCar.getHorsePower() + " hp | " +
+                        electricCar.getBatteryCapacity() + " kWh | " +
+                        electricCar.getChargeTime() + "h charge");
+                count++;
+            }
+        }
+
+        System.out.println();
+
+        System.out.println("-- Gas Cars--");
+        for (Car car : this.inventory) {
+            if (car instanceof GasCar gasCar) {
+                System.out.println(count + ". " + gasCar.getBrand() + " " + gasCar.getModel() + " | " +
+                        gasCar.getHorsePower() + " hp | " +
+                        gasCar.getFuelTankCapacity() + " L | " +
+                        gasCar.getEngineType() + " Engine");
+                count++;
+            }
+        }
+    }
 
     /**
      * Adds the input car to the inventory
      * @param car the input car to be added
      */
-    public void addCar(Car car) {}
+    public void addCar(Car car) {
+        this.inventory.add(car);
+    }
 
     /**
      * Checks if car is in the inventory, removes it
      * @param car the input car to be removed
      */
-    public void removeCar(Car car) {}
+    public void removeCar(Car car) {
+        this.inventory.remove(car);
+    }
 
     /**
      * Compares dealership o1 to dealership o2 based first on their inventory count, and second their name
@@ -49,11 +84,52 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
      *         1 if o1 has more cars/more cars + name comes alphabetically before o2's/more cars + names comes alphabetically after o2's
      */
     @Override
-    public int compare(Dealership o1, Dealership o2) {}
+    public int compare(Dealership o1, Dealership o2) {
+        return o1.getInventory().size() - o2.getInventory().size() * 1000 +
+                o1.getName().compareTo(o2.getName());
+    }
 
-    public List<Car> filterByBrand(String brand) {}
+    public List<Car> filterByBrand(String brand) {
+        List<Car> filteredList = new ArrayList<>();
+        try {
+            if (brand == null) {
+                throw new IllegalArgumentException("Brand cannot be null");
+            }
+            for (Car car : this.inventory) {
+                if (car.getBrand().equals(brand)) {
+                    filteredList.add(car);
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return new ArrayList<>();
+        } catch (NullPointerException e) {
+            System.out.println("Error: Inventory is null");
+            return new ArrayList<>();
+        }
+        return filteredList;
+    }
 
-    public List<Car> filterByModel(String model) {}
+    public List<Car> filterByModel(String model) {
+        List<Car> filteredList = new ArrayList<>();
+        try {
+            if (model == null) {
+                throw new IllegalArgumentException("Model cannot be null");
+            }
+            for (Car car : this.inventory) {
+                if (car.getModel().equals(model)) {
+                    filteredList.add(car);
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return new ArrayList<>();
+        } catch (NullPointerException e) {
+            System.out.println("Error: Inventory is null");
+            return new ArrayList<>();
+        }
+        return filteredList;
+    }
 
     @Override
     public String toString() {
