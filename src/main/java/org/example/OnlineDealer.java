@@ -28,7 +28,7 @@ public class OnlineDealer extends Dealership {
     }
 
     /**
-     * Compares dealership o1 to dealership o2 based off their rating
+     * Compares online dealer o1 to online dealer o2 based off their rating
      * @param o1 the first object to be compared.
      * @param o2 the second object to be compared.
      * @return 0 if their rating is equal
@@ -36,15 +36,36 @@ public class OnlineDealer extends Dealership {
      *         1 if the rating of the first dealership is high than the second
      */
     @Override
-    public int compare(Dealership o1, Dealership o2) {}
+    public int compare(Dealership o1, Dealership o2) {
+        try {
+            OnlineDealer d1 = (OnlineDealer) o1;
+            OnlineDealer d2 = (OnlineDealer) o2;
+
+            return Double.compare(d1.getRating(), d2.getRating());
+        } catch (ClassCastException e) {
+            System.out.println("Error: Both dealerships must be online dealers in order to be compared");
+            return 0;
+        }
+    }
 
     /**
      * Rates online dealerships based off their rating
-     * @return Great if dealership rating is higher than 4
-     *         Average if dealership rating is between 3 and 4
-     *         Terrible if dealership rating is lower than 3
+     * @return Great if online dealer rating is higher than 4
+     *         Average if online dealer rating is between 3 and 4
+     *         Terrible if online dealer rating is lower than 3
      */
-    public String getRatingCategory() {}
+    public String getRatingCategory() {
+        if (this.getRating() < 0 || this.getRating() > 5) {
+            return "Invalid rating";
+        }
+
+        if (this.getRating() > 4) {
+            return "Great";
+        } else if (this.getRating() > 3 && this.getRating() <= 4) {
+            return "Average";
+        }
+        return "Low";
+    }
 
     @Override
     public String toString() {

@@ -29,12 +29,12 @@ public class InPersonDealer extends Dealership {
     }
 
     /**
-     * Compares dealership o1 to dealership o2 based off number of employees
+     * Compares in person dealer o1 to in person dealer o2 based off number of employees
      * @param o1 the first object to be compared.
      * @param o2 the second object to be compared.
      * @return 0 if the number of employees is the same
-     *         -1 if the first dealership has fewer employees than the second
-     *         1 if the first dealership has more employees than the second
+     *         -1 if the first in person dealer has fewer employees than the second
+     *         1 if the first in person dealer has more employees than the second
      */
     @Override
     public int compare(Dealership o1, Dealership o2) {}
