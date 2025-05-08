@@ -30,11 +30,14 @@ public class ElectricCar extends Car {
      * Compares car o to this car based off charge time then battery capacity
      * @param o the object to be compared.
      * @return 0 if both the charge time and battery capacity of car o and this car are the same
-     *         -1 if this car has higher charging time/higher charging time + lower battery capactiy/higher battery capacity than car o
+     *         -1 if this car has higher charging time/higher charging time + lower battery capacity/higher battery capacity than car o
      *         1 if this car has lower charging time/lower charging time + lower batter capacity/higher batter capacity than car o
      */
     @Override
     public int compareTo(Car o) {
+        ElectricCar car = (ElectricCar) o;
+        return Double.compare(this.chargeTime, car.chargeTime) * 1000 +
+                Double.compare(this.batteryCapacity, car.batteryCapacity);
     }
 
     /**
@@ -43,7 +46,18 @@ public class ElectricCar extends Car {
      * @return true if the electric car is fast charging
      *         false if the electric car isn't fast charging
      */
-    public boolean isFastCharging() {}
+    public boolean isFastCharging() {
+        try {
+            if (this.chargeTime < 0) {
+                throw new IllegalArgumentException("Charging time cannot be less than zero");
+            }
+
+            return this.chargeTime < 6;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+    }
 
     /**
      * Verifies the range of an electric car based on its battery capacity
@@ -51,7 +65,18 @@ public class ElectricCar extends Car {
      * @return true if the electric car is low range
      *         false if the electric car is high range
      */
-    public boolean isLowRange() {}
+    public boolean isLowRange() {
+        try {
+            if (this.batteryCapacity < 0) {
+                throw new IllegalArgumentException("Battery capacity cannot be less than zero");
+            }
+
+            return this.batteryCapacity < 40;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+    }
 
     @Override
     public String toString() {

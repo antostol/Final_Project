@@ -35,6 +35,8 @@ public class GasCar extends Car {
      */
     @Override
     public int compareTo(Car o) {
+        GasCar car = (GasCar) o;
+        return Double.compare(this.fuelTankCapacity, car.fuelTankCapacity);
     }
 
     /**
@@ -43,7 +45,9 @@ public class GasCar extends Car {
      * @return true if the input fuel is the right fuel
      *         false if the input fuel is the wrong fuel
      */
-    public boolean isRightFuel(String inputFuelType) {}
+    public boolean isRightFuel(String inputFuelType) {
+        return this.fuelType.equalsIgnoreCase(inputFuelType);
+    }
 
     @Override
     public String toString() {
