@@ -46,7 +46,15 @@ public class GasCar extends Car {
      *         false if the input fuel is the wrong fuel
      */
     public boolean isRightFuel(String inputFuelType) {
-        return this.fuelType.equalsIgnoreCase(inputFuelType);
+        try {
+            if (inputFuelType == null || inputFuelType.isEmpty()) {
+                throw new IllegalArgumentException("Input Fuel Type cannot be null or empty");
+            }
+            return this.fuelType.equalsIgnoreCase(inputFuelType);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     @Override
