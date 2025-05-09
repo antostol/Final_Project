@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Clock;
 import java.time.Instant;
+import java.time.LocalTime;
 import java.time.ZoneId;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,30 +36,29 @@ class InPersonDealerTest {
 
     @Test
     public void testIsOpen_DuringHours() {
-        Clock fixedClock = Clock.fixed(Instant.parse("2023-05-01T14:00:00Z"), ZoneId.of("America/Toronto"));
+        LocalTime currentTime = LocalTime.of(14,0);
         InPersonDealer dealer = new InPersonDealer("09:00-17:00", "1234 Boulevard St-Laurent, Montreal, QC", 10);
-        assertTrue(dealer.isOpen(fixedClock));
+        assertTrue(dealer.isOpen(currentTime));
     }
 
     @Test
     public void testIsOpen_BeforeHours() {
-        Clock fixedClock = Clock.fixed(Instant.parse("2023-05-01T07:00:00Z"), ZoneId.of("America/Toronto"));
+        LocalTime currentTime = LocalTime.of(7,0);
         InPersonDealer dealer = new InPersonDealer("09:00-17:00", "4567 Rue Sainte-Catherine, Montreal, QC", 10);
-        assertFalse(dealer.isOpen(fixedClock));
+        assertFalse(dealer.isOpen(currentTime));
     }
 
     @Test
     public void testIsOpen_AfterHours() {
-        Clock fixedClock = Clock.fixed(Instant.parse("2023-05-01T18:00:00Z"), ZoneId.of("America/Toronto"));
+        LocalTime currentTime = LocalTime.of(18,0);
         InPersonDealer dealer = new InPersonDealer("09:00-17:00", "7890 Avenue du Parc, Montreal, QC", 10);
-        assertFalse(dealer.isOpen(fixedClock));
+        assertFalse(dealer.isOpen(currentTime));
     }
 
     @Test
     public void testIsOpen_InvalidFormat() {
-        Clock clock = Clock.systemUTC();
         InPersonDealer dealer = new InPersonDealer("Invalid", "3210 Rue Sherbrooke Ouest, Montreal, QC", 10);
-        assertFalse(dealer.isOpen(clock));
+        assertFalse(dealer.isOpen(LocalTime.now()));
     }
 
     @Test

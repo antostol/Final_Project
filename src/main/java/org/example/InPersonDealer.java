@@ -1,7 +1,6 @@
 package org.example;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
@@ -63,7 +62,7 @@ public class InPersonDealer extends Dealership {
      * @return true if the store is opened
      *         false if the store isn't opened
      */
-    public boolean isOpen() {
+    public boolean isOpen(LocalTime currentTime) {
         try {
             String[] parts = storeHours.split("-");
             if (parts.length != 2) {
@@ -71,8 +70,6 @@ public class InPersonDealer extends Dealership {
             }
             LocalTime openTime = LocalTime.parse(parts[0]);
             LocalTime closeTime = LocalTime.parse(parts[1]);
-
-            LocalTime currentTime = LocalTime.now();
 
             return !currentTime.isBefore(openTime) && !currentTime.isAfter(closeTime);
         } catch (DateTimeException e) {
