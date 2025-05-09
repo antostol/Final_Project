@@ -38,12 +38,18 @@ public class OnlineDealer extends Dealership {
     @Override
     public int compare(Dealership o1, Dealership o2) {
         try {
+            if (!(o1 instanceof OnlineDealer) || !(o2 instanceof OnlineDealer)) {
+                throw new ClassCastException("Both dealerships must be online dealers in order to be compared");
+            }
             OnlineDealer d1 = (OnlineDealer) o1;
             OnlineDealer d2 = (OnlineDealer) o2;
 
             return Double.compare(d1.getRating(), d2.getRating());
         } catch (ClassCastException e) {
-            System.out.println("Error: Both dealerships must be online dealers in order to be compared");
+            System.out.println("Error:" + e.getMessage());
+            return 0;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
             return 0;
         }
     }

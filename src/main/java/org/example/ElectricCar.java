@@ -35,9 +35,22 @@ public class ElectricCar extends Car {
      */
     @Override
     public int compareTo(Car o) {
-        ElectricCar car = (ElectricCar) o;
-        return Double.compare(this.chargeTime, car.chargeTime) * 1000 +
-                Double.compare(this.batteryCapacity, car.batteryCapacity);
+        try {
+            if (o == null) {
+                throw new IllegalArgumentException("Car cannot be null");
+            }
+            if (!(o instanceof ElectricCar car)) {
+                throw new ClassCastException("Car must be of type ElectricCar");
+            }
+            return Double.compare(this.chargeTime, car.chargeTime) * 1000 +
+                    Double.compare(this.batteryCapacity, car.batteryCapacity);
+        } catch (IllegalArgumentException | ClassCastException e) {
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
+            return 0;
+        }
     }
 
     /**
@@ -55,6 +68,9 @@ public class ElectricCar extends Car {
             return this.chargeTime < 6;
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
             return false;
         }
     }
@@ -74,6 +90,9 @@ public class ElectricCar extends Car {
             return this.batteryCapacity < 40;
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
             return false;
         }
     }

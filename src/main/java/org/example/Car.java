@@ -29,9 +29,23 @@ public abstract class Car implements Comparable<Car> {
      */
     @Override
     public int compareTo(Car o) {
-        return this.horsePower - o.horsePower * 1000
-                + this.brand.compareTo(o.brand) * 100
-                + this.model.compareTo(o.model);
+        try {
+            if (o == null) {
+                throw new IllegalArgumentException("Can't compare a null object");
+            }
+            if (this.brand == null || o.brand == null || this.model == null || o.model == null) {
+                throw new IllegalStateException("Car brand and/or model cannot be null");
+            }
+            return this.horsePower - o.horsePower * 1000
+                    + this.brand.compareTo(o.brand) * 100
+                    + this.model.compareTo(o.model);
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        } catch (Exception e) {
+            System.out.println("Unexpected error: ");
+            return 0;
+        }
     }
 
     /**
@@ -49,6 +63,9 @@ public abstract class Car implements Comparable<Car> {
             return this.horsePower > 400;
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
             return false;
         }
     }

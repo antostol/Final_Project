@@ -35,8 +35,21 @@ public class GasCar extends Car {
      */
     @Override
     public int compareTo(Car o) {
-        GasCar car = (GasCar) o;
-        return Double.compare(this.fuelTankCapacity, car.fuelTankCapacity);
+        try {
+            if (o == null) {
+                throw new IllegalArgumentException("Car cannot be null");
+            }
+            if (!(o instanceof GasCar car)) {
+                throw new ClassCastException("Car must be a GasCar");
+            }
+            return Double.compare(this.fuelTankCapacity, car.fuelTankCapacity);
+        } catch (IllegalArgumentException | ClassCastException e) {
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
+            return 0;
+        }
     }
 
     /**
@@ -53,6 +66,9 @@ public class GasCar extends Car {
             return this.fuelType.equalsIgnoreCase(inputFuelType);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
             return false;
         }
     }

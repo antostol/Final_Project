@@ -85,8 +85,25 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
      */
     @Override
     public int compare(Dealership o1, Dealership o2) {
-        return o1.getInventory().size() - o2.getInventory().size() * 1000 +
-                o1.getName().compareTo(o2.getName());
+        try {
+            if (o1 == null || o2 == null) {
+                throw new IllegalArgumentException("Dealerships cannot be null");
+            }
+            if (o1.getInventory() == null || o2.getInventory() == null) {
+                throw new IllegalStateException("Dealership inventory cannot be null");
+            }
+            if (o1.getName() == null || o2.getName() == null) {
+                throw new IllegalStateException("Dealership name cannot be null");
+            }
+            return o1.getInventory().size() - o2.getInventory().size() * 1000 +
+                    o1.getName().compareTo(o2.getName());
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
+            return 0;
+        }
     }
 
     public List<Car> filterByBrand(String brand) {
@@ -105,6 +122,9 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
             return new ArrayList<>();
         } catch (NullPointerException e) {
             System.out.println("Error: Inventory is null");
+            return new ArrayList<>();
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
             return new ArrayList<>();
         }
         return filteredList;
@@ -126,6 +146,9 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
             return new ArrayList<>();
         } catch (NullPointerException e) {
             System.out.println("Error: Inventory is null");
+            return new ArrayList<>();
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
             return new ArrayList<>();
         }
         return filteredList;

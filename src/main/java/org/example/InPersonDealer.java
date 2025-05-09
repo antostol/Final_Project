@@ -1,6 +1,8 @@
 package org.example;
 
-import java.time.Clock;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,14 +39,53 @@ public class InPersonDealer extends Dealership {
      *         1 if the first in person dealer has more employees than the second
      */
     @Override
-    public int compare(Dealership o1, Dealership o2) {}
+    public int compare(Dealership o1, Dealership o2) {
+        try {
+            if (!(o1 instanceof InPersonDealer || o2 instanceof InPersonDealer)) {
+                throw new ClassCastException("Both dealerships must be in person dealers in order to be compared");
+            }
+
+            InPersonDealer inPerson1 = (InPersonDealer) o1;
+            InPersonDealer inPerson2 = (InPersonDealer) o2;
+
+            return Integer.compare(inPerson1.getNumberOfEmployees(), inPerson2.getNumberOfEmployees());
+        } catch (ClassCastException e) {
+            System.out.println("Error: " + e.getMessage());
+            return 0;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
+            return 0;
+        }
+    }
 
     /**
      * Checks if dealership is opened based off the store hours and the given system clock
      * @return true if the store is opened
      *         false if the store isn't opened
      */
-    public boolean isOpen(Clock clock) {}
+    public boolean isOpen() {
+        try {
+            String[] parts = storeHours.split("-");
+            if (parts.length != 2) {
+                throw new IllegalArgumentException("Store hours must be in format HH:mm-HH:mm");
+            }
+            LocalTime openTime = LocalTime.parse(parts[0]);
+            LocalTime closeTime = LocalTime.parse(parts[1]);
+
+            LocalTime currentTime = LocalTime.now();
+
+            return !currentTime.isBefore(openTime) && !currentTime.isAfter(closeTime);
+        } catch (DateTimeException e) {
+            System.out.println("Error: Invalid time format");
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
+            return false;
+        }
+    }
 
     /**
      * Verifies if input location matches with the store location
@@ -52,7 +93,26 @@ public class InPersonDealer extends Dealership {
      * @return true if the input location matches with the store location
      *         false if the input location doesn't match with the store location
      */
-    public boolean isLocated(String location) {}
+    public boolean isLocated(String location) {
+        try {
+            if (location == null || location.trim().isEmpty()) {
+                throw new IllegalArgumentException("Location cannot be null or empty");
+            }
+            if (!this.location.equalsIgnoreCase(location)) {
+                System.out.println("Location does not match store location");
+                return false;
+            } else {
+                System.out.println("Location matches store location");
+                return true;
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
+            return false;
+        }
+    }
 
     @Override
     public String toString() {
