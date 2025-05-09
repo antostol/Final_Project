@@ -17,19 +17,21 @@ public class FileManager {
             writer.write("====Dealership inventory:====\n");
 
             for (Car car : inventory) {
-                writer.write("Car\n");
-                writer.write("Brand:" + car.getBrand() + "\n");
-                writer.write("Model:" + car.getModel() + "\n");
-                writer.write("Horsepower:" + car.getHorsePower() + "\n");
 
                 if (car instanceof ElectricCar electricCar) {
                     writer.write("Electric\n");
+                    writer.write("Brand: " + car.getBrand() + "\n");
+                    writer.write("Model: " + car.getModel() + "\n");
+                    writer.write("Horsepower: " + car.getHorsePower() + " hp\n");
                     writer.write("Battery capacity: " + electricCar.getBatteryCapacity() + " kWh\n");
                     writer.write("Charging type: " + electricCar.getChargingType() + "\n");
                     writer.write("Charging time: " + electricCar.getChargeTime() + " h\n");
 
                 } else if (car instanceof GasCar gasCar) {
                     writer.write("Gas\n");
+                    writer.write("Brand: " + car.getBrand() + "\n");
+                    writer.write("Model: " + car.getModel() + "\n");
+                    writer.write("Horsepower: " + car.getHorsePower() + " hp\n");
                     writer.write("Fuel tank capacity: " + gasCar.getFuelTankCapacity() + " L\n");
                     writer.write("Fuel type: " + gasCar.getFuelType() + "\n");
                     writer.write("Engine type: " + gasCar.getEngineType() + "\n");
@@ -55,13 +57,11 @@ public class FileManager {
                 if (line.equals("====Dealership inventory:====") || line.equals("-------------------------------")) {
                     continue;
                 }
-
-                if (line.equals("Car")) {
+                    String typeLine = line.trim();
                     String brand = reader.readLine().split(":",2)[1].trim();
                     String model = reader.readLine().split(":",2)[1].trim();
-                    int horsePower = Integer.parseInt(reader.readLine().split(":",2)[1].trim()  );
+                    int horsePower = Integer.parseInt(reader.readLine().split(":",2)[1].replace(" hp", "").trim());
 
-                    String typeLine = reader.readLine().trim();
                     if (typeLine.equals("Electric")) {
                         double batteryCapacity = Double.parseDouble(reader.readLine().split(":",2)[1].replace(" kWh", "").trim());
                         String chargingType = reader.readLine().split(":",2)[1].trim();
@@ -75,7 +75,6 @@ public class FileManager {
 
                         inventory.add(new GasCar(brand, model, horsePower, fuelTankCapacity, fuelType, engineType));
                     }
-                }
             }
 
             dealership.setInventory(inventory);
