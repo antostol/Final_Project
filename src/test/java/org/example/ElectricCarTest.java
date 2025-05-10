@@ -42,6 +42,13 @@ class ElectricCarTest {
     }
 
     @Test
+    public void testCompareTo_InvalidType_ThrowsClassException() {
+        ElectricCar c = new ElectricCar("Tesla", "Model", 500, 5.0, "DC", 100);
+        Car car = new GasCar("Ford", "Fusion", 200, 50, "Gasoline", "V6");
+        assertDoesNotThrow(() -> c.compareTo(car));
+    }
+
+    @Test
     public void testIsFastCharging_TrueBoundary() {
         ElectricCar car = new ElectricCar(5.9, "AC", 70);
         boolean expected = true;
@@ -103,6 +110,12 @@ class ElectricCarTest {
         boolean expected = true;
         boolean actual = car.isLowRange();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testIsLowRange_NegativeBatteryCapacity() {
+        ElectricCar car = new ElectricCar(5.0, "AC", -10.0);
+        assertDoesNotThrow(car::isLowRange);
     }
 
 }

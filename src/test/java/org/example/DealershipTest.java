@@ -92,6 +92,12 @@ class DealershipTest {
     }
 
     @Test
+    public void testRemoveCar_Null() {
+        Dealership dealership = new InPersonDealer();
+        assertDoesNotThrow(() -> dealership.removeCar(null));
+    }
+
+    @Test
     public void testFilterByBrand_OneMatch() {
         Dealership dealership = new InPersonDealer();
         dealership.addCar(new GasCar("Ford", "Explorer", 290, 70, "Gasoline", "V6"));
@@ -131,6 +137,12 @@ class DealershipTest {
         int expected = 0;
         int actual = result.size();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void filterByBrand_NullInput() {
+        Dealership dealership = new InPersonDealer();
+        assertDoesNotThrow(() -> dealership.filterByBrand(null));
     }
 
     @Test

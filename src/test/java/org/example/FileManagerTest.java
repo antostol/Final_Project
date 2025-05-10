@@ -142,4 +142,10 @@ class FileManagerTest {
 
         assertEquals(2, dealership.getInventory().size(), "There should be 2 cars in the inventory");
     }
+
+    @Test
+    public void testReadFromFile_NonExistentFile() {
+        Dealership dealership1 = new InPersonDealer();
+        assertThrows(RuntimeException.class, () -> FileManager.readFromFile(dealership1, TEST_FIlE));
+    }
 }

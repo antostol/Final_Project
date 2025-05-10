@@ -32,6 +32,12 @@ class InPersonDealerTest {
     }
 
     @Test
+    public void testIsLocated_NullInput() {
+        InPersonDealer dealer = new InPersonDealer("9-5", "123 rue Muir", 10);
+        assertDoesNotThrow(() -> dealer.isLocated(null));
+    }
+
+    @Test
     public void testIsOpen_DuringHours() {
         LocalTime currentTime = LocalTime.of(14,0);
         InPersonDealer dealer = new InPersonDealer("09:00-17:00", "1234 Boulevard St-Laurent, Montreal, QC", 10);
@@ -56,6 +62,12 @@ class InPersonDealerTest {
     public void testIsOpen_InvalidFormat() {
         InPersonDealer dealer = new InPersonDealer("Invalid", "3210 Rue Sherbrooke Ouest, Montreal, QC", 10);
         assertFalse(dealer.isOpen(LocalTime.now()));
+    }
+
+    @Test
+    public void testIsOpen_InvalidFormatException() {
+        InPersonDealer inPersonDealer = new InPersonDealer("invalidformat", "location", 5);
+        assertDoesNotThrow(() -> inPersonDealer.isOpen(LocalTime.now()));
     }
 
     @Test

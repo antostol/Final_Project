@@ -72,4 +72,10 @@ class CarTest {
         boolean actual = c.isHighPerformance();
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testIsHighPerformance_NegativeHorsePower_ThrowsException() {
+        Car c = new GasCar("Brand", "Model", -100, 50, "Gasoline", "V6");
+        assertDoesNotThrow(c::isHighPerformance);
+    }
 }

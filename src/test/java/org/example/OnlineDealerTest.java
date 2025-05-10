@@ -34,6 +34,13 @@ class OnlineDealerTest {
     }
 
     @Test
+    public void testCompare_WrongTypes() {
+        OnlineDealer d1 = new OnlineDealer();
+        Dealership other = new InPersonDealer();
+        assertDoesNotThrow(() -> d1.compare(d1, other));
+    }
+
+    @Test
     public void testGetRatingCategory_Great() {
         OnlineDealer d = new OnlineDealer("https://www.automart.com", "Policy", 4.5);
         assertEquals("Great", d.getRatingCategory());
