@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public abstract class Dealership implements Comparator<Dealership>, Searchable {
     protected String name;
@@ -107,16 +108,13 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
     }
 
     public List<Car> filterByBrand(String brand) {
-        List<Car> filteredList = new ArrayList<>();
         try {
             if (brand == null) {
                 throw new IllegalArgumentException("Brand cannot be null");
             }
-            for (Car car : this.inventory) {
-                if (car.getBrand().equals(brand)) {
-                    filteredList.add(car);
-                }
-            }
+            return inventory.stream()
+                    .filter(car -> brand.equalsIgnoreCase(car.getBrand()))
+                    .toList();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
             return new ArrayList<>();
@@ -127,20 +125,16 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
             System.out.println("Unexpected error");
             return new ArrayList<>();
         }
-        return filteredList;
     }
 
     public List<Car> filterByModel(String model) {
-        List<Car> filteredList = new ArrayList<>();
         try {
             if (model == null) {
                 throw new IllegalArgumentException("Model cannot be null");
             }
-            for (Car car : this.inventory) {
-                if (car.getModel().equals(model)) {
-                    filteredList.add(car);
-                }
-            }
+            return inventory.stream()
+                    .filter(car -> model.equalsIgnoreCase(car.getModel()))
+                    .toList();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
             return new ArrayList<>();
@@ -151,7 +145,6 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
             System.out.println("Unexpected error");
             return new ArrayList<>();
         }
-        return filteredList;
     }
 
     @Override
@@ -174,7 +167,9 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Dealership dealership = (Dealership) o;
-        return phoneNumber == dealership.phoneNumber && inventory == dealership.inventory && Objects.equals(name, dealership.name);
+        return phoneNumber == dealership.phoneNumber &&
+                Objects.equals(inventory, dealership.inventory) &&
+                Objects.equals(name, dealership.name);
     }
 
     @Override

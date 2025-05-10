@@ -115,7 +115,7 @@ public class InPersonDealer extends Dealership {
     public String toString() {
         return "In Person Dealer\n" +
                 "Store hours: " + storeHours + "\n" +
-                "Location: " + storeHours + "\n" +
+                "Location: " + location + "\n" +
                 "Number of employees " + numberOfEmployees + "\n" +
                 super.toString().replace("Dealership", "");
     }
