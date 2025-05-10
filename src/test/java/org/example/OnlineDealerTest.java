@@ -29,7 +29,8 @@ class OnlineDealerTest {
     @Test
     public void testCompare_NonOnlineDealerInput() {
         OnlineDealer d1 = new OnlineDealer("https://www.motorworld.com", "Easy", 4.0);
-        Dealership d2 = new Dealership("CityCars", 1234567890, null) {};
+        Dealership d2 = new Dealership("CityCars", 1234567890, null) {
+        };
         assertEquals(0, d1.compare(d1, d2)); // should safely handle non-OnlineDealer
     }
 

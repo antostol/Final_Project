@@ -28,36 +28,42 @@ public class ElectricCar extends Car {
 
     /**
      * Compares car o to this car based off charge time then battery capacity
+     *
      * @param o the object to be compared.
      * @return 0 if both the charge time and battery capacity of car o and this car are the same
-     *         -1 if this car has higher charging time/higher charging time + lower battery capacity/higher battery capacity than car o
-     *         1 if this car has lower charging time/lower charging time + lower batter capacity/higher batter capacity than car o
+     * -1 if this car has higher charging time/higher charging time + lower battery capacity/higher battery capacity than car o
+     * 1 if this car has lower charging time/lower charging time + lower batter capacity/higher batter capacity than car o
      */
     @Override
     public int compareTo(Car o) {
-        try {
-            if (o == null) {
-                throw new IllegalArgumentException("Car cannot be null");
-            }
-            if (!(o instanceof ElectricCar car)) {
-                throw new ClassCastException("Car must be of type ElectricCar");
-            }
-            return Double.compare(this.chargeTime, car.chargeTime) * 1000 +
-                    Double.compare(this.batteryCapacity, car.batteryCapacity);
-        } catch (IllegalArgumentException | ClassCastException e) {
-            System.out.println("Error: " + e.getMessage());
-            return 0;
-        } catch (Exception e) {
-            System.out.println("Unexpected error");
+        if (o == null || !(o instanceof ElectricCar)) {
             return 0;
         }
+
+        ElectricCar other = (ElectricCar) o;
+
+        if (this.chargeTime < other.chargeTime) {
+            return 1;
+        } else if (this.chargeTime > other.chargeTime) {
+            return -1;
+        }
+
+        if (this.batteryCapacity > other.batteryCapacity) {
+            return 1;
+        } else if (this.batteryCapacity < other.batteryCapacity) {
+            return -1;
+        }
+
+        return 0;
     }
+
 
     /**
      * Verifies the charging speed of an electric car based on its charging time
      * 6+ hours = not fast charging; 6- hours = fast charging
+     *
      * @return true if the electric car is fast charging
-     *         false if the electric car isn't fast charging
+     * false if the electric car isn't fast charging
      */
     public boolean isFastCharging() {
         try {
@@ -78,8 +84,9 @@ public class ElectricCar extends Car {
     /**
      * Verifies the range of an electric car based on its battery capacity
      * 40- kWh = low range; 40+ kWh = high range
+     *
      * @return true if the electric car is low range
-     *         false if the electric car is high range
+     * false if the electric car is high range
      */
     public boolean isLowRange() {
         try {

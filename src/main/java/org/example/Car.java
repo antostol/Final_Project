@@ -22,10 +22,11 @@ public abstract class Car implements Comparable<Car> {
 
     /**
      * Compares car o to this car based on first horsepower, then brand, then model
+     *
      * @param o the object to be compared.
      * @return 0 if horsepower, brand and model are the same for this car and car o
-     *         -1 if car o has lower horsepower/lower horsepower + brand/model that come alphabetically before/afterward car o's
-     *         1 if car o has higher horsepower/higher horsepower + brand/model that come alphabetically before/afterward car o's
+     * Negative if car o has lower horsepower/lower horsepower + brand/model that come alphabetically before/afterward car o's
+     * Positive if car o has higher horsepower/higher horsepower + brand/model that come alphabetically before/afterward car o's
      */
     @Override
     public int compareTo(Car o) {
@@ -51,8 +52,9 @@ public abstract class Car implements Comparable<Car> {
     /**
      * Verifies the performance of a car based off of its horsepower
      * 400 hp and less = isn't high performance; 400+ hp = is high performance
+     *
      * @return true if the car is high performance
-     *         returns false if car isn't high performance
+     * returns false if car isn't high performance
      */
     public boolean isHighPerformance() {
         try {
@@ -60,7 +62,7 @@ public abstract class Car implements Comparable<Car> {
                 throw new IllegalArgumentException("Horse power cannot be less than zero");
             }
 
-            return this.horsePower > 400;
+            return this.horsePower >= 400;
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
             return false;

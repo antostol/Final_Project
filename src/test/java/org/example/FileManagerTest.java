@@ -31,7 +31,7 @@ class FileManagerTest {
     public void testWriteToFileEmptyInventory() throws IOException {
         FileManager.writeToFile(dealership, TEST_FIlE);
 
-        try (BufferedReader reader =  new BufferedReader(new FileReader(TEST_FIlE))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FIlE))) {
             String firstLine = reader.readLine();
             assertEquals("====Dealership inventory:====", firstLine);
         }
@@ -43,7 +43,7 @@ class FileManagerTest {
         dealership.addCar(electricCar);
         FileManager.writeToFile(dealership, TEST_FIlE);
 
-        try (BufferedReader reader =  new BufferedReader(new FileReader(TEST_FIlE))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FIlE))) {
             String line;
             boolean found = false;
             while ((line = reader.readLine()) != null) {
@@ -62,7 +62,7 @@ class FileManagerTest {
         dealership.addCar(gasCar);
         FileManager.writeToFile(dealership, TEST_FIlE);
 
-        try (BufferedReader reader =  new BufferedReader(new FileReader(TEST_FIlE))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FIlE))) {
             String line;
             boolean found = false;
             while ((line = reader.readLine()) != null) {
@@ -84,7 +84,7 @@ class FileManagerTest {
 
         FileManager.writeToFile(dealership, TEST_FIlE);
 
-        try (BufferedReader reader =  new BufferedReader(new FileReader(TEST_FIlE))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(TEST_FIlE))) {
             String line;
             boolean foundElectric = false;
             boolean foundGas = false;

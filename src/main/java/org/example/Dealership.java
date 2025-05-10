@@ -38,7 +38,7 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
         System.out.println("-- Electric cars--");
         for (Car car : this.inventory) {
             if (car instanceof ElectricCar electricCar) {
-                System.out.println(count + ". " +  electricCar.getBrand() + " " + electricCar.getModel() +  " | " +
+                System.out.println(count + ". " + electricCar.getBrand() + " " + electricCar.getModel() + " | " +
                         electricCar.getHorsePower() + " hp | " +
                         electricCar.getBatteryCapacity() + " kWh | " +
                         electricCar.getChargeTime() + "h charge");
@@ -62,6 +62,7 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
 
     /**
      * Adds the input car to the inventory
+     *
      * @param car the input car to be added
      */
     public void addCar(Car car) {
@@ -70,6 +71,7 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
 
     /**
      * Checks if car is in the inventory, removes it
+     *
      * @param car the input car to be removed
      */
     public void removeCar(Car car) {
@@ -78,11 +80,12 @@ public abstract class Dealership implements Comparator<Dealership>, Searchable {
 
     /**
      * Compares dealership o1 to dealership o2 based first on their inventory count, and second their name
+     *
      * @param o1 the first object to be compared.
      * @param o2 the second object to be compared.
      * @return 0 if both dealerships have the same inventory size and same name
-     *         -1 if o1 has fewer cars/fewer cars + name doesn't come alphabetically before o2's
-     *         1 if o1 has more cars/more cars + name comes alphabetically before o2's/more cars + names comes alphabetically after o2's
+     * Negative if o1 has fewer cars/fewer cars + name doesn't come alphabetically before o2's
+     * Positive if o1 has more cars/more cars + name comes alphabetically before o2's/more cars + names comes alphabetically after o2's
      */
     @Override
     public int compare(Dealership o1, Dealership o2) {

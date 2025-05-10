@@ -29,11 +29,12 @@ public class OnlineDealer extends Dealership {
 
     /**
      * Compares online dealer o1 to online dealer o2 based off their rating
+     *
      * @param o1 the first object to be compared.
      * @param o2 the second object to be compared.
      * @return 0 if their rating is equal
-     *         -1 if the rating of the first dealership is lower than the second
-     *         1 if the rating of the first dealership is high than the second
+     * Negative if the rating of the first dealership is lower than the second
+     * Positive if the rating of the first dealership is high than the second
      */
     @Override
     public int compare(Dealership o1, Dealership o2) {
@@ -56,9 +57,10 @@ public class OnlineDealer extends Dealership {
 
     /**
      * Rates online dealerships based off their rating
+     *
      * @return Great if online dealer rating is higher than 4
-     *         Average if online dealer rating is between 3 and 4
-     *         Terrible if online dealer rating is lower than 3
+     * Average if online dealer rating is between 3 and 4
+     * Terrible if online dealer rating is lower than 3
      */
     public String getRatingCategory() {
         if (this.getRating() < 0 || this.getRating() > 5) {

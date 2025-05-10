@@ -31,11 +31,12 @@ public class InPersonDealer extends Dealership {
 
     /**
      * Compares in person dealer o1 to in person dealer o2 based off number of employees
+     *
      * @param o1 the first object to be compared.
      * @param o2 the second object to be compared.
      * @return 0 if the number of employees is the same
-     *         -1 if the first in person dealer has fewer employees than the second
-     *         1 if the first in person dealer has more employees than the second
+     * Negative if the first in person dealer has fewer employees than the second
+     * Positive if the first in person dealer has more employees than the second
      */
     @Override
     public int compare(Dealership o1, Dealership o2) {
@@ -59,8 +60,9 @@ public class InPersonDealer extends Dealership {
 
     /**
      * Checks if dealership is opened based off the store hours and the given system clock
+     *
      * @return true if the store is opened
-     *         false if the store isn't opened
+     * false if the store isn't opened
      */
     public boolean isOpen(LocalTime currentTime) {
         try {
@@ -86,9 +88,10 @@ public class InPersonDealer extends Dealership {
 
     /**
      * Verifies if input location matches with the store location
+     *
      * @param location the input location
      * @return true if the input location matches with the store location
-     *         false if the input location doesn't match with the store location
+     * false if the input location doesn't match with the store location
      */
     public boolean isLocated(String location) {
         try {
@@ -133,7 +136,9 @@ public class InPersonDealer extends Dealership {
         return Objects.hash(super.hashCode(), storeHours, location, numberOfEmployees);
     }
 
-    public String getStoreHours() { return storeHours; }
+    public String getStoreHours() {
+        return storeHours;
+    }
 
     public void setStoreHours(String storeHours) {
         this.storeHours = storeHours;

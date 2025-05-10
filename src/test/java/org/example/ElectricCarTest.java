@@ -42,10 +42,12 @@ class ElectricCarTest {
     }
 
     @Test
-    public void testCompareTo_InvalidType_ThrowsClassException() {
-        ElectricCar c = new ElectricCar("Tesla", "Model", 500, 5.0, "DC", 100);
-        Car car = new GasCar("Ford", "Fusion", 200, 50, "Gasoline", "V6");
-        assertDoesNotThrow(() -> c.compareTo(car));
+    public void testCompareTo_InvalidType_ReturnsZero() {
+        ElectricCar e = new ElectricCar("Tesla", "Model S", 500, 3.0, "DC", 60);
+        Car gasCar = new GasCar("Toyota", "Camry", 150, 50.0, "Gasoline", "V6");
+
+        int result = e.compareTo(gasCar);
+        assertEquals(0, result);
     }
 
     @Test

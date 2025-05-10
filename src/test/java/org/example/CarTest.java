@@ -9,36 +9,28 @@ class CarTest {
     public void testCompareTo_SameHorsePowerBrandModel() {
         Car c1 = new ElectricCar("Tesla", "Model S", 500, 1.0, "DC", 100.0);
         Car c2 = new ElectricCar("Tesla", "Model S", 500, 2.0, "DC", 80.0);
-        int expected = 0;
-        int actual = c1.compareTo(c2);
-        assertEquals(expected, actual);
+        assertEquals(0, c1.compareTo(c2));
     }
 
     @Test
     public void testCompareTo_HigherHorsePower() {
         Car c1 = new ElectricCar("Tesla", "Model S", 600, 1.0, "DC", 100.0);
         Car c2 = new ElectricCar("Tesla", "Model S", 500, 2.0, "DC", 80.0);
-        int expected = 1;
-        int actual = c1.compareTo(c2);
-        assertEquals(expected, actual);
+        assertTrue(c1.compareTo(c2) > 0);
     }
 
     @Test
     public void testCompareTo_LowerHorsePower() {
         Car c1 = new ElectricCar("Tesla", "Model S", 400, 1.0, "DC", 100.0);
         Car c2 = new ElectricCar("Tesla", "Model S", 500, 2.0, "DC", 80.0);
-        int expected = -1;
-        int actual = c1.compareTo(c2);
-        assertEquals(expected, actual);
+        assertTrue(c1.compareTo(c2) < 0);
     }
 
     @Test
     public void testCompareTo_SameHorsePowerDifferentBrand() {
         Car c1 = new ElectricCar("Audi", "e-tron", 500, 1.0, "DC", 100.0);
         Car c2 = new ElectricCar("Tesla", "Model S", 500, 2.0, "DC", 80.0);
-        int expected = -1;
-        int actual = c1.compareTo(c2);
-        assertEquals(expected, actual);
+        assertTrue(c1.compareTo(c2) < 0);
     }
 
     @Test

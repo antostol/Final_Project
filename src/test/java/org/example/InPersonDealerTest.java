@@ -39,21 +39,21 @@ class InPersonDealerTest {
 
     @Test
     public void testIsOpen_DuringHours() {
-        LocalTime currentTime = LocalTime.of(14,0);
+        LocalTime currentTime = LocalTime.of(14, 0);
         InPersonDealer dealer = new InPersonDealer("09:00-17:00", "1234 Boulevard St-Laurent, Montreal, QC", 10);
         assertTrue(dealer.isOpen(currentTime));
     }
 
     @Test
     public void testIsOpen_BeforeHours() {
-        LocalTime currentTime = LocalTime.of(7,0);
+        LocalTime currentTime = LocalTime.of(7, 0);
         InPersonDealer dealer = new InPersonDealer("09:00-17:00", "4567 Rue Sainte-Catherine, Montreal, QC", 10);
         assertFalse(dealer.isOpen(currentTime));
     }
 
     @Test
     public void testIsOpen_AfterHours() {
-        LocalTime currentTime = LocalTime.of(18,0);
+        LocalTime currentTime = LocalTime.of(18, 0);
         InPersonDealer dealer = new InPersonDealer("09:00-17:00", "7890 Avenue du Parc, Montreal, QC", 10);
         assertFalse(dealer.isOpen(currentTime));
     }
@@ -94,7 +94,8 @@ class InPersonDealerTest {
     @Test
     public void testCompare_NonInPersonDealer() {
         InPersonDealer d1 = new InPersonDealer("9-5", "1600 Rue Notre-Dame Ouest, Montréal, QC", 15);
-        Dealership d2 = new Dealership("Generic", 111, null) {};
+        Dealership d2 = new Dealership("Generic", 111, null) {
+        };
         assertEquals(0, d1.compare(d1, d2));
     }
 }
